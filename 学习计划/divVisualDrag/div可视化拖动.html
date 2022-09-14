@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>div可视化拖动</title>
+</head>
+<style>
+    .box {
+        width: 100px;
+        height: 100px;
+        background-color: aqua;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+</style>
+
+<body>
+    <div class="box" id="box"></div>
+</body>
+<script>
+    var box = document.getElementById("box")
+    let move = false
+    let x
+    let y
+    box.onmousedown = function (e) {
+        x = e.offsetX
+        y = e.offsetY
+        move = true
+        document.onmousemove = function (e) {
+            if (move == false) {
+                return
+            }
+            let x2 = e.clientX
+            let y2 = e.clientY
+            var left = x2 - x
+            var top = y2 - y
+
+            //盒子不能超出可视区域
+            if (top > document.documentElement.clientHeight - box.offsetHeight) {
+                top = document.documentElement.clientHeight - box.offsetHeight
+            } else if (top < 0) {
+                top = 0
+            }
+            if (left > document.documentElement.clientWidth - box.offsetWidth) {
+                left = document.documentElement.clientWidth - box.offsetWidth
+            } else if (left < 0) {
+                left = 0
+            }
+            box.style.left = left + "px"
+            box.style.top = top + "px"
+        }
+        document.onmouseup = function (e) {
+            move = false
+        }
+    }
+
+
+
+</script>
+
+</html>

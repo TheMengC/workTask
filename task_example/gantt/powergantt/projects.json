@@ -1,0 +1,54 @@
+[{
+    "id": "1",
+    "projectName": "北洋传媒2021上半年报",
+    "duration": "80",
+    "tasks": [
+        {
+            "id": "2",
+            "start_date": "2021-07-07",
+            "end_date": "2021-07-15",
+            "name": "任务二",
+            "resources": []
+        },
+        {
+            "id": "3",
+            "start_date": "2021-07-02",
+            "end_date": "2021-07-20",
+            "name": "任务三",
+            "resources": [
+
+            ]
+        }
+    ]
+}, {
+    "id": "2",
+    "projectName": "北洋传媒2021年报",
+    "duration": "80",
+    "tasks": [{
+            "id": "4",
+            "start_date": "2021-07-01",
+            "end_date": "2021-07-02",
+            "name": "任务一",
+            "resources": []
+        },
+        {
+            "id": "5",
+            "start_date": "2021-07-01",
+            "end_date": "2021-8-01",
+            "name": "任务二",
+            "resources": [{
+                "id": "a2fa0534-ba64-4b16-8fb8-0638868a09d1",
+                "name": "沈松涛"
+            }]
+        },
+        {
+            "id": "6",
+            "start_date": "2021-06-01",
+            "end_date": "2021-07-01",
+            "name": "任务三",
+            "resources": [
+
+            ]
+        }
+    ]
+}]

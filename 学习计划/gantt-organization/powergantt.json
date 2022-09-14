@@ -1,0 +1,82 @@
+[
+    {
+        "id": "1",
+        "name": "请求1",
+        "duration": "200",
+        "start": "0",
+        "shape": "rectangle",
+        "pid": ["0"]
+    },
+    {
+        "id": "2",
+        "name": "请求2",
+        "start": "200",
+        "shape": "rectangle",
+        "duration": "300",
+        "pid": ["1"]
+    },
+    {
+        "id": "3",
+        "name": "请求3",
+        "start": "200",
+        "shape": "square",
+        "duration": "400",
+        "pid": ["1"]
+    },
+    {
+        "id": "4",
+        "name": "请求4",
+        "start": "600",
+        "shape": "rectangle",
+        "duration": "500",
+        "pid": ["3"]
+    },
+    {
+        "id": "5",
+        "name": "请求5",
+        "start": "1100",
+        "shape": "rectangle",
+        "duration": "400",
+        "pid": [ "4", "10", "1" ]
+    },
+    {
+        "id": "6",
+        "name": "请求6",
+        "start": "1500",
+        "shape": "circle",
+        "duration": "300",
+        "pid": ["5"]
+    },
+    {
+        "id": "7",
+        "name": "请求7",
+        "start": "1800",
+        "shape": "square",
+        "duration": "400",
+        "pid": ["6"]
+    },
+    {
+        "id": "8",
+        "name": "请求8",
+        "start": "2200",
+        "shape": "circle",
+        "duration": "500",
+        "pid": ["7"]
+    },
+    {
+        "id": "9",
+        "name": "请求9",
+        "start": "2700",
+        "shape": "rectangle",
+        "duration": "400",
+        "pid": ["8"]
+    },
+    {
+        "id": "10",
+        "name": "请求10",
+        "start": "500",
+        "shape": "rectangle",
+        "duration": "200",
+        "pid": ["2"]
+    }
+]

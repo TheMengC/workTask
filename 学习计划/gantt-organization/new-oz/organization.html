@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="new-organization.js"></script>
+    <link rel="stylesheet" href="./organization.css">
+</head>
+
+<body>
+    <div id="oz"></div>
+</body>
+
+</html>
+<script>
+    let oz = document.getElementById("oz")
+
+    window.onload = function () {
+        let url = '../powergantt.json'
+        var req = new XMLHttpRequest()
+        req.open("get", url)
+        req.send(null)
+        req.onload = function () {
+            if (req.responseText) {
+                var json = JSON.parse(req.responseText)
+                let tree = arrayToTree(json)
+                new Organization(oz, {
+                    data: tree,
+                    nodeClick: function (node) {
+                        alert(node)
+                    }
+                });
+            }
+        }
+    }
+
+    function arrayToTree(arr) {
+        let cloneData = JSON.parse(JSON.stringify(arr))
+        return cloneData.filter(father => {
+            let branchArr = cloneData.filter(child => child.pid.indexOf(father.id) > -1);
+            branchArr.length > 0 ? father.children = branchArr : ''
+            return father.pid == 0
+        })
+    }
+
+    
+
+</script>

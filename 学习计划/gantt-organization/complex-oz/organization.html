@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <!-- <script src="complex-organization.js"></script> -->
+    <script src="complex-oz.js"></script>
+    <link rel="stylesheet" href="./organization.css">
+</head>
+
+<body>
+    <div id="oz"></div>
+</body>
+
+</html>
+<script>
+    let oz = document.getElementById("oz")
+    let tree = []
+    window.onload = function () {
+        let url = '../powergantt.json'
+        var req = new XMLHttpRequest()
+        req.open("get", url)
+        req.send(null)
+        req.onload = function () {
+            if (req.responseText) {
+                var json = JSON.parse(req.responseText)
+                let level = 0
+                let pid = "0"
+                setLevel(json, level, pid)
+                tree = arrayToTree(json)
+                new Organization(oz, {
+                    data: tree,
+                    nodeClick: function (node) {
+                        alert(node)
+                    }
+                });
+            }
+        }
+    }
+
+    function arrayToTree(arr) {
+        let cloneData = JSON.parse(JSON.stringify(arr))
+        return cloneData.filter(father => {
+            let branchArr = cloneData.filter(child => child.pid.indexOf(father.id) > -1);
+            branchArr.length > 0 ? father.children = branchArr : ''
+            return father.pid == 0
+        })
+    }
+
+    function setLevel(data, level, pid) {
+        let sameLevel = data.filter(item => item.pid.indexOf(pid) > -1);
+        if (sameLevel && sameLevel.length > 0) {
+            level++
+            sameLevel.map(item => {
+                if (!item.level || item.level < level) {
+                    item.level = JSON.stringify(level) - 1
+                }
+                setLevel(data, level, item.id)
+            })
+        }
+    }
+
+</script>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+    <script src="./powergantt.json"></script>
+    <script src="./powergantt/powergantt.js"></script>
+    <link rel="stylesheet" href="./powergantt/powergantt.css">
+
+    <script src="./organization/organization.js"></script>
+    <link rel="stylesheet" href="./organization/organization.css">
+</head>
+<style>
+
+</style>
+
+<body>
+    <ul id="tab">
+        <li class="current">流程图</li>
+        <li>甘特图</li>
+    </ul>
+    <div class="content">
+        <div class="item">
+            <div id="oz"></div>
+        </div>
+        <div class="item  item-hidden">
+            <input type="number" placeholder="请输入更改的刻度值" id="scale" />
+            <button onclick="handleScaleChange()">更改</button>
+            <div id="gantt1" class="gantt"></div>
+        </div>
+    </div>
+</body>
+
+<script>
+    let tabs = document.querySelectorAll("#tab li")
+    var contents = document.querySelectorAll(".item")
+    for (let i = 0; i < tabs.length; i++) {
+        tabs[i].setAttribute('index', i)
+        tabs[i].onclick = function () {
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].className = ''
+            }
+            this.className = 'current'
+            var index = this.getAttribute('index')
+            for (let i = 0; i < contents.length; i++) {
+                contents[i].classList.add('item-hidden')
+            }
+            contents[index].classList.remove('item-hidden')
+        }
+
+    }
+
+    //流程图
+    let oz = document.getElementById("oz")
+    //甘特图
+    var gantt1 = document.getElementById("gantt1")
+
+    var powerGantt = new powerGantt(gantt1)
+    let columns = [
+        {
+            field: "id",
+            text: "序号",
+            width: "50px"
+        },
+        {
+            field: "name",
+            text: "请求名称"
+        },
+        {
+            field: "duration",
+            text: "请求时长"
+        }
+    ]
+    powerGantt.setColumn(columns)
+    window.onload = function () {
+        var url = "./powergantt.json"
+        var request = new XMLHttpRequest()
+        request.open("get", url)
+        request.send(null)
+        request.onload = function () {
+            if (request.responseText) {
+                var json = JSON.parse(request.responseText)
+                powerGantt.setData(json)
+                let tree = arrayToTree(json)
+                console.log("tree", tree)
+                new Organization(oz, {
+                    data: tree,
+                    nodeClick: function (node) {
+                        alert(node)
+                    }
+                });
+            }
+        }
+    }
+
+    function handleScaleChange() {
+        let scaleValue = document.getElementById("scale").value
+        powerGantt.scaleChange(scaleValue)
+    }
+
+
+    function arrayToTree(arr) {
+        let cloneData = JSON.parse(JSON.stringify(arr))
+        return cloneData.filter(father => {
+            let branchArr = cloneData.filter(child => child.pid.indexOf(father.id) > -1)
+            branchArr.length > 0 ? father.children = branchArr : ''
+            return father.pid == 0
+        })
+    }
+</script>
+
+</html>

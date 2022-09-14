@@ -1,0 +1,39 @@
+<!--
+ * @Description: 
+ * @Author: 王玉宝
+ * @Date: 2022-04-12 14:04:37
+ * @LastEditTime: 2022-04-13 16:14:02
+ * @LastEditors:  
+ * @FilePath: \jqueryui.2.0\message\index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin="anonymous" src="https://lib.baomitu.com/jquery/3.6.0/jquery.js"></script>
+    <script src="./message.js"></script>
+    <!-- //at.alicdn.com/t/font_3251829_cvcq635jccl.css -->
+    <link href="//at.alicdn.com/t/font_3251829_d8z3bs9lpk.css" rel="stylesheet" type="text/css" />
+    <link href="./message.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <button onclick="handleClick()">弹出 notifccation</button>
+    <button onclick="handleClick2()">弹出 notifccation 不自动关闭</button>
+    <div style="width: 600px;height: 600px;position: absolute;top: 100px;left: 100px;background: red;" id="current">
+    </div>
+</body>
+</html>
+<script>
+    function handleClick() {
+        let a = $message.success("123",{target:"#current"})
+        console.log("1", a)
+    }
+    function handleClick2() {
+        $message.error()
+
+    }
+</script>

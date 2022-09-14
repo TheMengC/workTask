@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notification 组件</title>
+    <script crossorigin="anonymous" src="https://lib.baomitu.com/jquery/3.6.0/jquery.js"></script>
+    <script src="./notify.js"></script>
+    <link rel="stylesheet" href="./notify.css">
+</head>
+
+<body>
+    <button onclick="onBtnClick()">弹出Notification</button>
+</body>
+<script>
+    function onBtnClick() {
+        $notify.success({
+            title: "标题22",
+            message: "这是一条notification信息",
+            onClose: function() {
+                console.log("关闭")
+            }
+
+        })
+    }
+</script>
+
+</html>

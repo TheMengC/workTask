@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="./powergantt/powergantt.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script src="./monent.js"></script>
+    <script src="./powergantt/powergantt.js"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .gantt {
+            height: 100%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="gantt1" class="gantt">
+    </div>
+</body>
+
+</html>
+<script>
+    var powerGantt = new powerGantt(document.getElementById("gantt1"));
+    let columns = [{
+        field: "projectName",
+        text: "项目名",
+        width: 180
+    },
+    {
+        field: "duration",
+        text: "总工时"
+    }
+    ]
+    powerGantt.setColumn(columns);
+    $.ajax({
+        url: "./powergantt/projects.json",
+        success: function (res) {
+            powerGantt.setData(res);
+        }
+    })
+</script>
